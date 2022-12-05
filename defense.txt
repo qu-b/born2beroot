@@ -1,0 +1,136 @@
+Reasons to choose Debian over CentOS:
+	- Debian is easier to install and more user friendly, whereas CentOS is more complicated.
+	Therefore Debian is probably better for setting up your first VM.
+
+Difference between aptitude and apt:
+	- Both are package managers but aptitude is high-level, apt is low-level. Apt can be used in 
+	high-level package managers. Aptitude has more functionality, apt is more basic. Aptitude includes
+	functionalities of apt-cache and apt-mark as well as thos of apt-get. Aptitude comes with a UI.
+
+What is AppArmor?
+	- Linux kernel security module that allows the system admin to restrict programs' usage with per-program profiles.
+
+Login
+
+Check UFW is functioning:
+	- sudo service ufw status
+
+Check SSH is functioning:
+	- service sshd status
+
+Check OS:
+	- cat /etc/*_version (maybe?)
+
+Check user is in sudo and user42 groups:
+	- id -Gn username
+
+Add newuser:
+	- sudo adduser name
+
+Check passwd rules:
+	- sudo nano /etc/pam.d/common-password
+	The rules are: 
+		password [success=2 default=ignore] pam_unix.so obscure sha512 minlen=10
+
+		password    requisite         pam_pwquality.so retry=3 
+
+		password    requisite         pam_pwquality.so retry=3 lcredit =-1 ucredit=-1 
+		dcredit=-1 maxrepeat=3 usercheck=0 difok=7 enforce_for_root
+
+Check passwd expiration:
+	- sudo nano /etc/login.defs
+	Rules:
+		PASS_MAX_DAYS 30
+		PASS_MIN_DAYS 2
+		PASS_WARN_AGE 7
+
+GROUP
+
+Create evaluating group:
+	- sudo groupadd evaluating
+
+Assign newuser to group:
+	- sudo usermod -aG evaluating newuser
+
+Check they're in group:
+	- getent group evaluating
+
+Check current hostname:
+	- hostnamectl
+
+Change hostname:
+	- hostnamectl set-hostname new_hostname
+	- sudo nano /etc/hosts
+	
+	Change to:
+	127.0.0.1       localhost
+	127.0.0.1       new_hostname
+
+	- sudo reboot
+
+View partitions:
+	- lsblk
+
+What is LVM?
+	- Logical Volume Management is an alternative method of managing stoage systems, where logical volumes are created
+	instead of partitions 
+
+How does Logical Volume Management (LVM) work?
+	- LVM, or Logical Volume Management, is a storage device management technology that gives users the power to 
+		pool and abstract the physical layout of component storage devices for easier and flexible administration.
+
+UFW
+
+Check UFW is functioning:
+	- sudo service ufw status
+
+What is UFW? Why use it?
+	- UFW is the "Uncomplicated Firewall". A firewall is a security system. It monitors input and output traffic.
+	Typically, it establishes a barrier between a trusted network and an untrusted network, such as the internet.
+
+List UFW rules:
+	- ufw status numbered ("verbose" for more info)
+
+Add new rule on port 8080:
+	- sudo ufw allow 8080
+
+Check again with:
+	- ufw status numbered
+
+Delete rule:
+	- ufw delete rule number
+
+SSH
+
+Check SSH is installed and working.
+	- sudo service ssh status
+
+Connect from the host shell using
+	- ssh hostname
+
+What is SSH?
+	- Secure Shell is a network communication protocol that allows two computers to communicate and share data.
+	The communication between the computers is encrypted.
+	It is often used to login to a system remotely, for example.
+
+Check SSH is running only on Port 4242:
+	- sudo grep Port /etc/ssh/sshd_config
+
+Connect using newusername
+	- ssh newusername
+
+SCRIPT
+
+What is cron?
+	- cron is a linux job scheduler. These jobs, also known as cron jobs, run periodically at fixed times.
+
+Open script:
+	- vim /usr/local/bin/monitoring.sh
+
+(Open sudoers file (to add NOPOASSWD rule to execute script with no password):
+	- sudo visudo)
+
+Open crontab and change rule to */0.5 to execute script every 30 seconds,
+and comment its line out of the crontab file with crontab -e.
+
+BONUS?
