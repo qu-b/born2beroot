@@ -96,10 +96,10 @@ Add new rule on port 8080:
 	- sudo ufw allow 8080
 
 Check again with:
-	- ufw status numbered
+	- sudo ufw status numbered
 
 Delete rule:
-	- ufw delete rule number
+	- sudo ufw delete [rule number]
 
 SSH
 
