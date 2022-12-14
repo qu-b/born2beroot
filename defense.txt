@@ -20,6 +20,7 @@ Check SSH is functioning:
 
 Check OS:
 	- cat /etc/*_version (maybe?)
+	- hostnamectl
 
 Check user is in sudo and user42 groups:
 	- id -Gn username
