@@ -134,4 +134,3 @@ Open script:
 Open crontab and change rule to */0.5 to execute script every 30 seconds,
 and comment its line out of the crontab file with crontab -e.
 
-BONUS?
